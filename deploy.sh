@@ -17,14 +17,15 @@ fi
 if [ -n "$2" ]; then
 	msg="$2"
 fi
+git commit  -m "$msg"
 git tag -a "$tag" -m "$msg"
 
 # Push source and build repos.
 git remote -v &> /dev/null
 if [ $? -eq 0 ]
 then 
-git push -f origin master
+git push -f origin master --tags
 else 
 git remote add origin git@github.com:suainam/jsd.git
-git push -f origin master
+git push -f origin master --tags
 fi
