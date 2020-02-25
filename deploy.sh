@@ -9,11 +9,15 @@ printf "\033[0;32mDeploying updates to GitHub...\033[0m\n"
 git add .
 
 # Commit changes.
+tag="v10.0.1"
 msg="rebuilding site $(date)"
-if [ -n "$*" ]; then
-	msg="$*"
+if [ -n "$1" ]; then
+	tag="$1"
 fi
-git commit -m "$msg"
+if [ -n "$2" ]; then
+	msg="$2"
+fi
+git tag -a "$tag" -m "$msg"
 
 # Push source and build repos.
 git remote -v &> /dev/null
